@@ -1,11 +1,10 @@
-
 const Main = {
-    init: function() { 
+    init: function() {
         this.cachaSelectors()
         this.bindEvents()
     },
 
-    cachaSelectors: function() { 
+    cachaSelectors: function() {
         this.$checkButtons = document.querySelectorAll('.check')
         this.$inputTask = document.querySelector('#inputTask')
         this.$list = document.querySelector('#list')
@@ -13,8 +12,8 @@ const Main = {
         this.$toaster = document.querySelector('.toast')
     },
 
-    bindEvents: function() { 
-        const self = this 
+    bindEvents: function() {
+        const self = this
 
         this.$checkButtons.forEach(function(button) {
             button.onclick = self.Events.checkButton_click
@@ -30,9 +29,9 @@ const Main = {
     Events: {
         checkButton_click: function(e) {
             const li = e.target.parentElement
-            const isDone = li.classList.contains('done') 
+            const isDone = li.classList.contains('done')
 
-            if(!isDone) {
+            if (!isDone) {
                 return li.classList.add('done')
             }
             li.classList.remove('done')
@@ -41,8 +40,36 @@ const Main = {
         inputTask_keypress: function(e) {
             const key = e.key
             const value = e.target.value
+            if (key === 'Enter') {
+                if (e.target.value === '') {
+                    this.$toaster.classList.add('visible')
+                    this.$toaster.innerHTML = `<div>CADASTRE UMA TAREFA!</div>`
 
-            if(key === 'Enter') {
+                    setTimeout(() => {
+                        this.$toaster.classList.remove('visible')
+                    }, 4000)
+                } else {
+                    this.$list.innerHTML += `
+                        <li>
+                            <div class="check"></div>
+                            <label class="task">
+                                ${value}
+                            </label>
+                            <button class="remove"></button>			
+                        </li>
+                    `
+
+                    e.target.value = ''
+
+                    this.cachaSelectors()
+                    this.bindEvents()
+                }
+
+
+
+
+            }
+            /*if (key === 'Enter') {
                 this.$list.innerHTML += `
                 <li>
                     <div class="check"></div>
@@ -53,12 +80,13 @@ const Main = {
                 </li>
                 `
 
-                if(e.target.value == '') {
+                if (e.target.value === '') {
                     this.$toaster.classList.add('visible')
                     this.$toaster.innerHTML = `<div>CADASTRE UMA TAREFA!</div>`
                     this.$list.innerHTML = ''
                 }
-                setTimeout (() => {
+
+                setTimeout(() => {
                     this.$toaster.classList.remove('visible')
                 }, 4000)
 
@@ -66,7 +94,7 @@ const Main = {
 
                 this.cachaSelectors()
                 this.bindEvents()
-            }
+            }*/
         },
 
         removeButton_click: function(e) {
@@ -75,12 +103,12 @@ const Main = {
 
             setTimeout(function() {
                 li.classList.add('hidden')
-            },300)
+            }, 300)
         }
 
 
-    } 
-    
+    }
+
 }
 
 Main.init()
