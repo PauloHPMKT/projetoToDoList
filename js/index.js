@@ -65,36 +65,8 @@ const Main = {
                     this.bindEvents()
                 }
 
-
-
-
             }
-            /*if (key === 'Enter') {
-                this.$list.innerHTML += `
-                <li>
-                    <div class="check"></div>
-                    <label class="task">
-                        ${value}
-                    </label>
-                    <button class="remove"></button>			
-                </li>
-                `
-
-                if (e.target.value === '') {
-                    this.$toaster.classList.add('visible')
-                    this.$toaster.innerHTML = `<div>CADASTRE UMA TAREFA!</div>`
-                    this.$list.innerHTML = ''
-                }
-
-                setTimeout(() => {
-                    this.$toaster.classList.remove('visible')
-                }, 4000)
-
-                e.target.value = ''
-
-                this.cachaSelectors()
-                this.bindEvents()
-            }*/
+            
         },
 
         removeButton_click: function(e) {
